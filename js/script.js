@@ -3,7 +3,7 @@
 //console.log(document.getElementById("title"));
 //console.log(document instanceof HTMLDocument)
 
-document.addEventListener("DOMContentLoaded", function (event) {
+/*document.addEventListener("DOMContentLoaded", function (event) {
 		function sayHello () {
 			this.textContent = "Said it!"
 			var name = document.getElementById("name").value;
@@ -36,4 +36,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		);
 	}		
 );		
+*/
+document.addEventListener("DOMContentLoaded", function (event) {
+	document.querySelector("button").addEventListener("click", function (){
+
+		$ajaxUtils.sendGetReq("/js/name.json", function (res) {
+			var message = res.firstName + " " + res.lastName
+			if (res.likeChineseFood) {
+				message += " Likes Chinese Food";
+			}
+			else
+			{
+				message += " doesn't like Chinese food";
+			}
+			message += " and uses ";
+			message += res.numberOfDisplays;
+			message += " displays for coding."
+
+
+			document.querySelector("#content").innerHTML = "<h2> " + message + " </h2>";
+		});
+	});
+}
+);
 
